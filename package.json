@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+     "preview": "npx @cloudflare/next-on-pages",
+    "deploy": "npx @cloudflare/next-on-pages",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
