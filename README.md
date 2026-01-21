@@ -1,3 +1,72 @@
+# AI Concept Explainer – JEE / NEET
+
+An AI-powered web application that helps JEE and NEET students understand concepts clearly through **step-by-step explanations, worked examples, misconceptions, and practice MCQs**.
+
+This project demonstrates **AI integration, prompt engineering, clean frontend architecture, and thoughtful UX**.
+
+---
+
+## 🚀 Features
+
+- **Subject-aware explanations**
+  - Supports **Physics, Chemistry, and Biology**
+- **Difficulty control**
+  - Basic (intuitive explanations)
+  - Advanced (exam-oriented depth)
+- **AI-generated concept breakdown**
+  - Clear introduction, key points, and summary
+- **Worked numerical examples**
+  - Given → Steps → Final Answer
+- **Common misconceptions**
+  - Explains *why students are wrong* and *what is correct*
+- **Interactive MCQs**
+  - Instant feedback (correct / wrong)
+  - Explanation for each option
+- **Re-explain in simpler words**
+  - Allows iterative learning
+- **LaTeX math rendering**
+  - Powered by KaTeX
+- **Robust AI handling**
+  - Safe JSON parsing
+  - Graceful error handling
+
+---
+
+## 🧠 Why This Project?
+
+Many students struggle not because of lack of formulas, but because of:
+- Poor conceptual clarity
+- Uncorrected misconceptions
+- Lack of guided practice
+
+This app behaves like a **digital tutor**, not just a content generator.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Next.js 14 (App Router)**
+- **React 18**
+- **TypeScript**
+- **Tailwind CSS**
+- **KaTeX** (math rendering)
+
+### Backend / AI
+- **Next.js API Routes**
+- **OpenRouter (GPT-4o-mini)**  
+  *(Gemini compatible architecture)*
+- **Prompt engineering with strict JSON contracts**
+
+### Deployment
+- **Vercel**
+
+---
+
+## 📂 Project Structure
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
