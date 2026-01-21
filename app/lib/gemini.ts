@@ -2,15 +2,6 @@ import OpenAI from "openai";
 import { buildExplanationPrompt } from "./prompts";
 import { ExplanationResponse } from "./types";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENROUTER_API_KEY!,
-  baseURL: "https://openrouter.ai/api/v1",
-  defaultHeaders: {
-    "HTTP-Referer": "http://localhost:3000", // required by OpenRouter
-    "X-Title": "AI Concept Explainer",        // app name
-  },
-});
-
 /**
  * Safely extract the first valid JSON object from LLM output
  */
@@ -33,9 +24,21 @@ export async function generateExplanation(
   difficulty: "basic" | "advanced",
   subject: "Physics" | "Chemistry" | "Biology"
 ): Promise<ExplanationResponse> {
-  if (!process.env.OPENROUTER_API_KEY) {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+
+  if (!apiKey) {
     throw new Error("OPENROUTER_API_KEY is missing");
   }
+
+  // ✅ IMPORTANT: Create OpenAI client at RUNTIME (not build time)
+  const client = new OpenAI({
+    apiKey,
+    baseURL: "https://openrouter.ai/api/v1",
+    defaultHeaders: {
+      "HTTP-Referer": "https://your-app.pages.dev", // update after deploy
+      "X-Title": "AI Concept Explainer",
+    },
+  });
 
   const prompt = buildExplanationPrompt(topic, difficulty, subject);
 
@@ -56,24 +59,22 @@ export async function generateExplanation(
     throw new Error("No response generated from OpenRouter");
   }
 
-  // 🔍 TEMP DEBUG (remove later if you want)
+  // 🔍 Optional debug (remove later)
   console.log("RAW AI RESPONSE:\n", text);
 
   let jsonString: string;
 
   try {
     jsonString = extractJSON(text);
-  } catch (error) {
+  } catch {
     console.error("JSON Extraction Failed. Full Response:\n", text);
     throw new Error("AI response did not contain valid JSON");
   }
 
   try {
     return JSON.parse(jsonString) as ExplanationResponse;
-  } catch (error) {
+  } catch {
     console.error("JSON Parse Error. Extracted JSON:\n", jsonString);
-    throw new Error(
-      "AI returned malformed JSON. Please try again."
-    );
+    throw new Error("AI returned malformed JSON. Please try again.");
   }
 }
