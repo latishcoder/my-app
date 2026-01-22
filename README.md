@@ -60,10 +60,8 @@ This app behaves like a **digital tutor**, not just a content generator.
 
 ### Deployment
 - **Vercel**
+🔗 Live Demo: https://my-en1hoeoh5-latishdev-gmailcoms-projects.vercel.app/
 
----
-
-## 📂 Project Structure
 
 
 
